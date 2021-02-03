@@ -46,6 +46,13 @@ lsingle::~lsingle()
 void lsingle::add_to_list(unsigned long num,std::string name)
 {
    db_t *tmp = new db_t;
+
+   if(tmp == NULL)
+   {
+       cout << "Memory allocation failed\n";
+       exit(0);
+   }
+
    tmp->mob_no = num;
    name.copy(tmp->contact,sizeof name);
    tmp->next = slist;
@@ -60,7 +67,8 @@ void lsingle::print_list()
     cout << "Linear Print:\n";
     while(tmp != NULL)
     {
-        cout << std::addressof(tmp) << "Contact:" << tmp->contact << "\t" << "Mobile No:" << tmp->mob_no << "\n";
+        cout << std::addressof(tmp) << "Contact:" << tmp->contact << "\t" 
+             << "Mobile No:" << tmp->mob_no << "\n";
         tmp = tmp->next;
     }
 }
@@ -82,6 +90,12 @@ void lsingle::reverse_list()
 {
     int llen = get_list_len(), ltmp = llen;
     db_t *rev_arr = new db_t [llen];
+
+    if(rev_arr == NULL)
+    {
+        cout << "Memory allocation failed\n";
+        exit(0);
+    }
 
     tmp = slist;
 
